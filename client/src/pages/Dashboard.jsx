@@ -39,25 +39,37 @@ function Dashboard() {
 
   /* ================= FETCH CONTACTS ================= */
 
+useEffect(() => {
+
   const fetchContacts = async () => {
 
-    const params = {
-      search,
-      tag,
-      page,
-      limit: 10,
-    };
+    try {
 
-    // ✅ Add favorite ONLY if filter ON
-    if (favoriteOnly) {
-      params.favorite = true;
+      const params = {
+        search,
+        tag,
+        page,
+        limit: 10,
+      };
+
+      if (favoriteOnly) {
+        params.favorite = true;
+      }
+
+      const res = await getContacts(params);
+
+      setContacts(res.data.contacts);
+      setPages(res.data.pages);
+
+    } catch (err) {
+      console.error("Fetch contacts failed", err);
     }
-
-    const res = await getContacts(params);
-
-    setContacts(res.data.contacts);
-    setPages(res.data.pages);
   };
+
+  fetchContacts();
+
+}, [search, favoriteOnly, tag, page]);
+
 
   /* ================= FETCH TAGS ================= */
 
@@ -78,10 +90,6 @@ function Dashboard() {
 
     setTagsList(uniqueTags);
   };
-
-  useEffect(() => {
-    fetchContacts();
-  }, [search, favoriteOnly, tag, page]);
 
   useEffect(() => {
     fetchTags();
