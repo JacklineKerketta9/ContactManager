@@ -6,8 +6,7 @@ import ContactForm from "./pages/ContactForm";
 import ContactDetails from "./pages/ContactDetails";
 
 function App() {
-  const token = localStorage.getItem("token");
-
+  
   return (
     <BrowserRouter>
       <Routes>
