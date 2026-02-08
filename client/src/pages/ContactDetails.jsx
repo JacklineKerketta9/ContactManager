@@ -23,23 +23,29 @@ function ContactDetails() {
   });
 
   // Fetch contact
+  useEffect(() => {
   const fetchContact = async () => {
-    const res = await getContact(id);
+    try {
+      const res = await getContact(id);
 
-    setForm({
-      name: res.data.name || "",
-      phone: res.data.phone || "",
-      email: res.data.email || "",
-      company: res.data.company || "",
-      tags: res.data.tags?.join(", ") || "",
-      notes: res.data.notes || "",
-      favorite: res.data.favorite || false,
-    });
+      setForm({
+        name: res.data.name || "",
+        phone: res.data.phone || "",
+        email: res.data.email || "",
+        company: res.data.company || "",
+        tags: res.data.tags?.join(", ") || "",
+        notes: res.data.notes || "",
+        favorite: res.data.favorite || false,
+      });
+
+    } catch (error) {
+      console.error("Failed to fetch contact", error);
+    }
   };
 
-  useEffect(() => {
-    fetchContact();
-  }, [id]);
+  fetchContact();
+}, [id]);
+
 
   // Change handler
   const handleChange = (e) => {
