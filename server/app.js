@@ -9,8 +9,10 @@ const app = express();
 
 // Middlewares
 app.use(cors({
-  origin: "contact-manager-b79zi5zur-jackline-s-projects-70a2c02a.vercel.app"
+  origin: "https://contact-manager-two-tau.vercel.app",
+  credentials: true
 }));
+
 
 app.use(express.json());
 
