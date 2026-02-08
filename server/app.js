@@ -8,7 +8,10 @@ import errorMiddleware from "./middleware/errorMiddleware.js";
 const app = express();
 
 // Middlewares
-app.use(cors());
+app.use(cors({
+  origin: "contact-manager-b79zi5zur-jackline-s-projects-70a2c02a.vercel.app"
+}));
+
 app.use(express.json());
 
 // Routes
